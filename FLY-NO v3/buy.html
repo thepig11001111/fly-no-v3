@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FLY-NO — Browse Available Materials</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./base.css">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./pages.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+</head>
+<body>
+  <a href="#main" class="sr-only" style="position:absolute;top:0;left:0;z-index:999;padding:1rem;background:var(--color-primary);color:white;">Skip to content</a>
+
+  <!-- Navbar -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <a href="index.html" class="navbar-logo" aria-label="FLY-NO Home">
+        <img src="./assets/logo.jpg" alt="FLY-NO logo" width="120" height="40">
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="sell.html">Sell</a></li>
+        <li><a href="buy.html">Buy</a></li>
+        <li><a href="drive.html">Drive</a></li>
+      </ul>
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="mobile-menu" role="dialog" aria-label="Mobile navigation">
+    <button class="mobile-close" aria-label="Close menu">&times;</button>
+    <a href="index.html">Home</a>
+    <a href="sell.html">Sell</a>
+    <a href="buy.html">Buy</a>
+    <a href="drive.html">Drive</a>
+  </div>
+
+  <main id="main">
+    <section class="page-header">
+      <div class="container">
+        <h1>Browse Available Materials</h1>
+        <p>Find what you need from local sellers across Devon.</p>
+      </div>
+    </section>
+
+    <!-- Search Bar -->
+    <section style="padding-bottom:var(--space-6);">
+      <div class="container">
+        <div class="search-bar">
+          <div class="search-input-wrap">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <input type="text" id="searchInput" placeholder="Search materials, items, locations..." aria-label="Search materials">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Layout -->
+    <section class="section" style="padding-top:0;">
+      <div class="container">
+        <div class="buy-layout">
+          <!-- LEFT: Filter Sidebar -->
+          <aside class="filter-sidebar reveal" aria-label="Filters">
+            <div class="filter-group">
+              <h4>Category</h4>
+              <label class="filter-check"><input type="checkbox" checked data-filter-cat="white-goods"> White Goods</label>
+              <label class="filter-check"><input type="checkbox" checked data-filter-cat="furniture"> Furniture</label>
+              <label class="filter-check"><input type="checkbox" checked data-filter-cat="pallets"> Pallets</label>
+              <label class="filter-check"><input type="checkbox" checked data-filter-cat="construction"> Construction</label>
+            </div>
+
+            <div class="filter-group">
+              <h4>Location Radius</h4>
+              <input type="range" id="radiusSlider" min="1" max="30" value="15" aria-label="Location radius">
+              <div class="range-label"><span>1 mi</span><span id="radiusValue">15 miles</span><span>30 mi</span></div>
+            </div>
+
+            <div class="filter-group">
+              <h4>Condition</h4>
+              <div class="toggle-group">
+                <button class="toggle-btn active" data-condition="any">Any</button>
+                <button class="toggle-btn" data-condition="broken">Broken</button>
+                <button class="toggle-btn" data-condition="functional">Functional</button>
+              </div>
+            </div>
+          </aside>
+
+          <!-- CENTER: Product Grid -->
+          <div>
+            <div class="product-grid" id="productGrid">
+              <!-- Product 1: Broken Washing Machine -->
+              <div class="product-card reveal" data-category="white-goods" data-condition="broken" data-distance="5" data-name="broken washing machine">
+                <div class="product-img">
+                  <img src="./assets/washing-machine.jpg" alt="Broken Washing Machine">
+                  <span class="product-badge badge badge-red">Broken</span>
+                </div>
+                <div class="product-info">
+                  <h4>Broken Washing Machine</h4>
+                  <div class="product-meta"><span>Exeter, 5 mi</span></div>
+                  <div class="product-price">&pound;15</div>
+                  <div class="product-unit">/item</div>
+                  <a href="#" class="btn btn-primary btn-sm view-product-btn" style="width:100%;" data-product="washing-machine">View</a>
+                </div>
+              </div>
+
+              <!-- Product 2: Old Oak Table -->
+              <div class="product-card reveal" data-category="furniture" data-condition="functional" data-distance="8" data-name="old oak table">
+                <div class="product-img">
+                  <img src="./assets/oak-table.jpg" alt="Old Oak Table">
+                  <span class="product-badge badge badge-green">Functional</span>
+                </div>
+                <div class="product-info">
+                  <h4>Old Oak Table</h4>
+                  <div class="product-meta"><span>Exmouth, 8 mi</span></div>
+                  <div class="product-price">&pound;35</div>
+                  <div class="product-unit">/item</div>
+                  <a href="#" class="btn btn-primary btn-sm view-product-btn" style="width:100%;" data-product="oak-table">View</a>
+                </div>
+              </div>
+
+              <!-- Product 3: Wooden Pallets (x10) -->
+              <div class="product-card reveal" data-category="pallets" data-condition="functional" data-distance="12" data-name="wooden pallets">
+                <div class="product-img">
+                  <img src="./assets/pallets.jpg" alt="Wooden Pallets">
+                  <span class="product-badge badge badge-green">Functional</span>
+                </div>
+                <div class="product-info">
+                  <h4>Wooden Pallets (x10)</h4>
+                  <div class="product-meta"><span>Newton Abbot, 12 mi</span></div>
+                  <div class="product-price">&pound;28</div>
+                  <div class="product-unit">/10 pallets</div>
+                  <a href="#" class="btn btn-primary btn-sm view-product-btn" style="width:100%;" data-product="pallets">View</a>
+                </div>
+              </div>
+
+              <!-- Product 4: Broken Fridge Freezer -->
+              <div class="product-card reveal" data-category="white-goods" data-condition="broken" data-distance="3" data-name="broken fridge freezer">
+                <div class="product-img">
+                  <img src="./assets/fridge-freezer.jpg" alt="Broken Fridge Freezer">
+                  <span class="product-badge badge badge-red">Broken</span>
+                </div>
+                <div class="product-info">
+                  <h4>Broken Fridge Freezer</h4>
+                  <div class="product-meta"><span>Topsham, 3 mi</span></div>
+                  <div class="product-price">&pound;10</div>
+                  <div class="product-unit">/item</div>
+                  <a href="#" class="btn btn-primary btn-sm view-product-btn" style="width:100%;" data-product="fridge-freezer">View</a>
+                </div>
+              </div>
+
+              <!-- Product 5: Worn Sofa (3-seater) -->
+              <div class="product-card reveal" data-category="furniture" data-condition="worn" data-distance="10" data-name="worn sofa">
+                <div class="product-img">
+                  <img src="./assets/sofa.jpg" alt="Worn Sofa">
+                  <span class="product-badge badge badge-orange">Worn</span>
+                </div>
+                <div class="product-info">
+                  <h4>Worn Sofa (3-seater)</h4>
+                  <div class="product-meta"><span>Crediton, 10 mi</span></div>
+                  <div class="product-price">&pound;20</div>
+                  <div class="product-unit">/item</div>
+                  <a href="#" class="btn btn-primary btn-sm view-product-btn" style="width:100%;" data-product="sofa">View</a>
+                </div>
+              </div>
+
+              <!-- Product 6: Plywood Offcuts -->
+              <div class="product-card reveal" data-category="construction" data-condition="functional" data-distance="2" data-name="plywood offcuts">
+                <div class="product-img">
+                  <img src="./assets/plywood-offcuts.jpg" alt="Plywood Offcuts">
+                  <span class="product-badge badge badge-green">Functional</span>
+                </div>
+                <div class="product-info">
+                  <h4>Plywood Offcuts</h4>
+                  <div class="product-meta"><span>Exeter, 2 mi</span></div>
+                  <div class="product-price">&pound;8</div>
+                  <div class="product-unit">/kg</div>
+                  <a href="#" class="btn btn-primary btn-sm view-product-btn" style="width:100%;" data-product="plywood">View</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: Price Trends -->
+          <aside class="trends-panel reveal">
+            <h3>Price Trends</h3>
+
+            <div class="chart-container">
+              <p id="chartTitle" style="font-size:var(--text-xs);font-weight:600;color:var(--color-text-muted);margin-bottom:var(--space-2);">Broken Washing Machines (Devon)</p>
+              <canvas id="priceChart" width="240" height="160" aria-label="Price trend chart"></canvas>
+            </div>
+
+            <h4 style="font-size:var(--text-sm);margin-bottom:var(--space-3);color:var(--color-text);">Category Trends</h4>
+
+            <div class="trend-item" id="trend1">
+              <span class="trend-name">Washing Machines</span>
+              <span class="trend-change">&pound;10 &rarr; &pound;18 &uarr;</span>
+            </div>
+            <div class="trend-item" id="trend2">
+              <span class="trend-name">Pallets (per 10)</span>
+              <span class="trend-change">&pound;20 &rarr; &pound;28 &uarr;</span>
+            </div>
+            <div class="trend-item" id="trend3">
+              <span class="trend-name">Old Sofas</span>
+              <span class="trend-change">&pound;25 &rarr; &pound;45 &uarr;</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img src="./assets/logo-nobg.jpg" alt="FLY-NO" width="100" height="33">
+          <p>Turning waste into worth. The peer-to-peer marketplace that prevents fly-tipping through circular economy principles.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-links-group">
+            <h4>Marketplace</h4>
+            <a href="sell.html">Sell</a>
+            <a href="buy.html">Buy</a>
+            <a href="drive.html">Drive for FLY-NO</a>
+          </div>
+          <div class="footer-links-group">
+            <h4>Company</h4>
+            <a href="#">About Us</a>
+            <a href="#">Contact</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 FLY-NO. Turning waste into worth.
+      </div>
+    </div>
+  </footer>
+
+  <script src="./app.js"></script>
+  <script>
+  // Buy page — Filters, Chart, and Interactive features
+  (function() {
+    // ==========================================
+    // PRODUCT DATA FOR CHART
+    // ==========================================
+    const productChartData = {
+      'washing-machine': {
+        title: 'Broken Washing Machines (Devon)',
+        min: 10, max: 20,
+        trends: [
+          { name: 'Washing Machines', from: 10, to: 18 },
+          { name: 'Fridge Freezers', from: 5, to: 12 },
+          { name: 'White Goods Avg', from: 8, to: 15 }
+        ]
+      },
+      'oak-table': {
+        title: 'Old Oak Tables (Devon)',
+        min: 10, max: 50,
+        trends: [
+          { name: 'Oak Tables', from: 15, to: 35 },
+          { name: 'Furniture Avg', from: 12, to: 28 },
+          { name: 'Tables & Chairs', from: 10, to: 25 }
+        ]
+      },
+      'pallets': {
+        title: 'Wooden Pallets (Devon)',
+        min: 3, max: 6,
+        trends: [
+          { name: 'Pallets (per 10)', from: 20, to: 28 },
+          { name: 'Pallets (each)', from: 3, to: 5 },
+          { name: 'Bulk Pallets', from: 40, to: 55 }
+        ]
+      },
+      'fridge-freezer': {
+        title: 'Broken Fridge Freezers (Devon)',
+        min: 5, max: 15,
+        trends: [
+          { name: 'Fridge Freezers', from: 5, to: 12 },
+          { name: 'Washing Machines', from: 10, to: 18 },
+          { name: 'White Goods Avg', from: 8, to: 15 }
+        ]
+      },
+      'sofa': {
+        title: 'Worn Sofas (Devon)',
+        min: 20, max: 150,
+        trends: [
+          { name: 'Sofas (3-seater)', from: 25, to: 45 },
+          { name: 'Furniture Avg', from: 12, to: 28 },
+          { name: 'Armchairs', from: 15, to: 30 }
+        ]
+      },
+      'plywood': {
+        title: 'Plywood Offcuts (Devon)',
+        min: 5, max: 15,
+        trends: [
+          { name: 'Plywood (per kg)', from: 5, to: 10 },
+          { name: 'Construction Avg', from: 8, to: 14 },
+          { name: 'Timber Offcuts', from: 4, to: 9 }
+        ]
+      }
+    };
+
+    function generateTrendData(min, max) {
+      // Generate 4 data points with general upward trend
+      const range = max - min;
+      const points = [];
+      for (let i = 0; i < 4; i++) {
+        const baseProgress = i / 3; // 0 to 1
+        const baseValue = min + (range * baseProgress * 0.6);
+        const randomOffset = (Math.random() - 0.3) * (range * 0.3);
+        const value = Math.round(Math.max(min, Math.min(max, baseValue + randomOffset)));
+        points.push(value);
+      }
+      // Ensure general upward trend: last point > first point
+      if (points[3] <= points[0]) {
+        points[3] = Math.min(max, points[0] + Math.round(range * 0.3));
+      }
+      return points;
+    }
+
+    // ==========================================
+    // CHART INITIALIZATION
+    // ==========================================
+    let priceChart = null;
+
+    function initChart() {
+      const ctx = document.getElementById('priceChart');
+      if (!ctx || typeof Chart === 'undefined') return;
+
+      const gridColor = 'rgba(0,0,0,0.06)';
+      const textColor = '#6B7280';
+      const defaultData = generateTrendData(10, 20);
+
+      priceChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Dec', 'Jan', 'Feb', 'Mar'],
+          datasets: [{
+            label: 'Price (£)',
+            data: defaultData,
+            borderColor: '#2EA94F',
+            backgroundColor: function(context) {
+              const chart = context.chart;
+              const {ctx: c, chartArea} = chart;
+              if (!chartArea) return 'rgba(46, 169, 79, 0.1)';
+              const gradient = c.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
+              gradient.addColorStop(0, 'rgba(46, 169, 79, 0.25)');
+              gradient.addColorStop(1, 'rgba(46, 169, 79, 0.02)');
+              return gradient;
+            },
+            fill: true,
+            tension: 0.4,
+            pointBackgroundColor: '#2EA94F',
+            pointBorderColor: '#FFFFFF',
+            pointBorderWidth: 2,
+            pointRadius: 5,
+            pointHoverRadius: 7,
+            borderWidth: 3
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: '#2B2D33',
+              titleColor: '#FFFFFF',
+              bodyColor: '#FFFFFF',
+              borderColor: '#2EA94F',
+              borderWidth: 1,
+              cornerRadius: 8,
+              padding: 10,
+              callbacks: {
+                label: function(context) {
+                  return '£' + context.parsed.y;
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: { color: textColor, font: { family: 'Inter', size: 11 } }
+            },
+            y: {
+              min: 0,
+              max: 25,
+              grid: { color: gridColor },
+              ticks: {
+                color: textColor,
+                font: { family: 'Inter', size: 11 },
+                callback: function(value) { return '£' + value; }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function updateChart(productKey) {
+      if (!priceChart) return;
+      const data = productChartData[productKey];
+      if (!data) return;
+
+      const newData = generateTrendData(data.min, data.max);
+      const maxVal = Math.ceil(Math.max(...newData) * 1.3 / 5) * 5;
+
+      // Update chart title
+      document.getElementById('chartTitle').textContent = data.title;
+
+      // Update chart data
+      priceChart.data.datasets[0].data = newData;
+      priceChart.options.scales.y.max = maxVal;
+      priceChart.update();
+
+      // Update trend items
+      data.trends.forEach(function(trend, i) {
+        const trendEl = document.getElementById('trend' + (i + 1));
+        if (trendEl) {
+          trendEl.querySelector('.trend-name').textContent = trend.name;
+          trendEl.querySelector('.trend-change').innerHTML = '&pound;' + trend.from + ' &rarr; &pound;' + trend.to + ' &uarr;';
+        }
+      });
+    }
+
+    // ==========================================
+    // FILTERING LOGIC
+    // ==========================================
+    const productGrid = document.getElementById('productGrid');
+    const searchInput = document.getElementById('searchInput');
+    const radiusSlider = document.getElementById('radiusSlider');
+    const radiusValue = document.getElementById('radiusValue');
+    const categoryCheckboxes = document.querySelectorAll('[data-filter-cat]');
+    const conditionToggles = document.querySelectorAll('[data-condition]');
+
+    let activeCondition = 'any';
+
+    function filterProducts() {
+      const cards = productGrid.querySelectorAll('.product-card');
+      const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
+      const maxRadius = radiusSlider ? parseInt(radiusSlider.value) : 30;
+
+      // Get checked categories
+      const checkedCategories = [];
+      categoryCheckboxes.forEach(function(cb) {
+        if (cb.checked) {
+          checkedCategories.push(cb.getAttribute('data-filter-cat'));
+        }
+      });
+
+      let visibleCount = 0;
+
+      cards.forEach(function(card) {
+        const category = card.getAttribute('data-category');
+        const condition = card.getAttribute('data-condition');
+        const distance = parseInt(card.getAttribute('data-distance'));
+        const name = card.getAttribute('data-name');
+
+        let show = true;
+
+        // Category filter
+        if (checkedCategories.length > 0 && !checkedCategories.includes(category)) {
+          show = false;
+        }
+        // If no categories checked, hide all
+        if (checkedCategories.length === 0) {
+          show = false;
+        }
+
+        // Condition filter
+        if (activeCondition !== 'any' && condition !== activeCondition) {
+          show = false;
+        }
+
+        // Distance filter
+        if (distance > maxRadius) {
+          show = false;
+        }
+
+        // Search filter
+        if (searchTerm && !name.includes(searchTerm)) {
+          show = false;
+        }
+
+        card.style.display = show ? '' : 'none';
+        if (show) visibleCount++;
+      });
+
+      // Show/hide no results message
+      let noResultsEl = productGrid.querySelector('.no-results');
+      if (visibleCount === 0) {
+        if (!noResultsEl) {
+          noResultsEl = document.createElement('div');
+          noResultsEl.className = 'no-results';
+          noResultsEl.textContent = 'No products match your filters. Try adjusting your search criteria.';
+          productGrid.appendChild(noResultsEl);
+        }
+        noResultsEl.style.display = 'block';
+      } else if (noResultsEl) {
+        noResultsEl.style.display = 'none';
+      }
+    }
+
+    // Category checkbox listeners
+    categoryCheckboxes.forEach(function(cb) {
+      cb.addEventListener('change', filterProducts);
+    });
+
+    // Radius slider listener
+    if (radiusSlider && radiusValue) {
+      radiusSlider.addEventListener('input', function() {
+        radiusValue.textContent = this.value + ' miles';
+        filterProducts();
+      });
+    }
+
+    // Condition toggle listeners
+    conditionToggles.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        conditionToggles.forEach(function(b) { b.classList.remove('active'); });
+        this.classList.add('active');
+        activeCondition = this.getAttribute('data-condition');
+        filterProducts();
+      });
+    });
+
+    // Search input listener
+    if (searchInput) {
+      searchInput.addEventListener('input', filterProducts);
+    }
+
+    // ==========================================
+    // VIEW BUTTON CLICK — UPDATE CHART
+    // ==========================================
+    document.querySelectorAll('.view-product-btn').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const productKey = this.getAttribute('data-product');
+        updateChart(productKey);
+        // Scroll to chart on mobile
+        const trendsPanel = document.querySelector('.trends-panel');
+        if (trendsPanel && window.innerWidth < 1024) {
+          trendsPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // ==========================================
+    // INIT
+    // ==========================================
+    document.addEventListener('DOMContentLoaded', function() {
+      initChart();
+    });
+  })();
+  </script>
+</body>
+</html>

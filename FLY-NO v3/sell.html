@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FLY-NO — List Your Waste</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./base.css">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./pages.css">
+</head>
+<body>
+  <a href="#main" class="sr-only" style="position:absolute;top:0;left:0;z-index:999;padding:1rem;background:var(--color-primary);color:white;">Skip to content</a>
+
+  <!-- Navbar -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <a href="index.html" class="navbar-logo" aria-label="FLY-NO Home">
+        <img src="./assets/logo.jpg" alt="FLY-NO logo" width="120" height="40">
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="sell.html">Sell</a></li>
+        <li><a href="buy.html">Buy</a></li>
+        <li><a href="drive.html">Drive</a></li>
+      </ul>
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="mobile-menu" role="dialog" aria-label="Mobile navigation">
+    <button class="mobile-close" aria-label="Close menu">&times;</button>
+    <a href="index.html">Home</a>
+    <a href="sell.html">Sell</a>
+    <a href="buy.html">Buy</a>
+    <a href="drive.html">Drive</a>
+  </div>
+
+  <main id="main">
+    <section class="page-header">
+      <div class="container">
+        <h1>List Your Waste &mdash; Get Paid or Save on Removal</h1>
+        <p>Upload your item, get an instant quote, and schedule a pickup.</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0;">
+      <div class="container">
+        <div class="sell-layout">
+          <!-- LEFT: Quick Listing Form -->
+          <div class="reveal">
+            <div class="card">
+              <h3 style="margin-bottom:var(--space-6);">Quick Listing</h3>
+
+              <!-- Photo upload -->
+              <div class="upload-zone" style="margin-bottom:var(--space-6);">
+                <div class="upload-zone-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>
+                </div>
+                <p><strong>Drag & drop a photo</strong></p>
+                <p>or click to browse</p>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="category">Item Category</label>
+                <select class="form-select" id="category">
+                  <option value="washing-machine">Washing Machine</option>
+                  <option value="fridge-freezer">Fridge/Freezer</option>
+                  <option value="oven-cooker">Oven/Cooker</option>
+                  <option value="sofa">Sofa</option>
+                  <option value="table-chairs">Table/Chairs</option>
+                  <option value="wardrobe-dresser">Wardrobe/Dresser</option>
+                  <option value="pallets">Pallets</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="condition">Condition</label>
+                <select class="form-select" id="condition">
+                  <option>Broken</option>
+                  <option>Worn</option>
+                  <option>Functional</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="postcode">Location Postcode</label>
+                <input type="text" class="form-input" id="postcode" placeholder="EX4 6TL">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="desc">Description</label>
+                <textarea class="form-textarea" id="desc" placeholder="Describe your item..."></textarea>
+              </div>
+
+              <button class="btn btn-primary" id="getQuoteBtn" style="width:100%;">Get Instant Quote</button>
+            </div>
+          </div>
+
+          <!-- RIGHT: Results Stack -->
+          <div>
+            <!-- Instant Valuation -->
+            <div class="valuation-card reveal" id="valuationCard" style="margin-bottom:var(--space-6); display:none;">
+              <h3 style="margin-bottom:var(--space-3);">Instant Valuation</h3>
+              <div class="big-price" id="bigPrice">We'll pay you &pound;5 for this item</div>
+              <div class="comparison">
+                <div class="traditional">
+                  <strong>Traditional removal</strong><br><span id="traditionalCost">&pound;40+</span>
+                </div>
+                <div class="flyno">
+                  <strong>FLY-NO</strong><br>FREE (we pay you!)
+                </div>
+              </div>
+              <div class="savings-text" id="savingsText">&#10003; You save &pound;45+ compared to other services</div>
+            </div>
+
+            <!-- Schedule Pickup -->
+            <div class="card reveal" id="scheduleCard" style="margin-bottom:var(--space-6); display:none;">
+              <h3 style="margin-bottom:var(--space-4);">Schedule Pickup</h3>
+              <div class="calendar-mini">
+                <div class="day-label">M</div>
+                <div class="day-label">T</div>
+                <div class="day-label">W</div>
+                <div class="day-label">T</div>
+                <div class="day-label">F</div>
+                <div class="day-label">S</div>
+                <div class="day-label">S</div>
+                <div class="day">3</div>
+                <div class="day">4</div>
+                <div class="day">5</div>
+                <div class="day">6</div>
+                <div class="day">7</div>
+                <div class="day">8</div>
+                <div class="day">9</div>
+              </div>
+              <div class="time-slots">
+                <div class="time-slot">9am &ndash; 12pm</div>
+                <div class="time-slot">12 &ndash; 3pm</div>
+                <div class="time-slot">3 &ndash; 6pm</div>
+              </div>
+            </div>
+
+            <!-- Status Tracker -->
+            <div class="card reveal" id="statusCard" style="display:none;">
+              <h3 style="margin-bottom:var(--space-6);">Listing Status</h3>
+              <div class="status-tracker">
+                <div class="status-step">
+                  <div class="status-dot pending">1</div>
+                  <div class="status-label">Listed</div>
+                </div>
+                <div class="status-step">
+                  <div class="status-dot pending">2</div>
+                  <div class="status-label">Matched</div>
+                </div>
+                <div class="status-step">
+                  <div class="status-dot pending">3</div>
+                  <div class="status-label">Assigned</div>
+                </div>
+                <div class="status-step">
+                  <div class="status-dot pending">4</div>
+                  <div class="status-label">Collected</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img src="./assets/logo-nobg.jpg" alt="FLY-NO" width="100" height="33">
+          <p>Turning waste into worth. The peer-to-peer marketplace that prevents fly-tipping through circular economy principles.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-links-group">
+            <h4>Marketplace</h4>
+            <a href="sell.html">Sell</a>
+            <a href="buy.html">Buy</a>
+            <a href="drive.html">Drive for FLY-NO</a>
+          </div>
+          <div class="footer-links-group">
+            <h4>Company</h4>
+            <a href="#">About Us</a>
+            <a href="#">Contact</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 FLY-NO. Turning waste into worth.
+      </div>
+    </div>
+  </footer>
+
+  <script src="./app.js"></script>
+  <script>
+  // Sell page interactive logic
+  (function() {
+    // Pricing data
+    const pricingData = {
+      'washing-machine': { label: 'washing machine', flynoMin: 0, flynoMax: 5, tradMin: 35, tradMax: 60 },
+      'fridge-freezer':  { label: 'fridge/freezer',  flynoMin: 0, flynoMax: 3, tradMin: 50, tradMax: 80 },
+      'oven-cooker':     { label: 'oven/cooker',     flynoMin: 0, flynoMax: 3, tradMin: 45, tradMax: 70 },
+      'sofa':            { label: 'sofa',            flynoMin: 0, flynoMax: 10, tradMin: 45, tradMax: 80 },
+      'table-chairs':    { label: 'table/chairs',    flynoMin: 0, flynoMax: 5, tradMin: 45, tradMax: 80 },
+      'wardrobe-dresser':{ label: 'wardrobe/dresser',flynoMin: 0, flynoMax: 5, tradMin: 45, tradMax: 80 },
+      'pallets':         { label: 'pallets',         flynoMin: 0.50, flynoMax: 1.50, tradMin: 60, tradMax: 90 },
+      'other':           { label: 'item',            flynoMin: 0, flynoMax: 3, tradMin: 60, tradMax: 90 }
+    };
+
+    // Condition multiplier
+    function getConditionMultiplier(condition) {
+      switch(condition.toLowerCase()) {
+        case 'functional': return 1.0;
+        case 'worn': return 0.6;
+        case 'broken': return 0.3;
+        default: return 0.5;
+      }
+    }
+
+    const getQuoteBtn = document.getElementById('getQuoteBtn');
+    const valuationCard = document.getElementById('valuationCard');
+    const scheduleCard = document.getElementById('scheduleCard');
+    const statusCard = document.getElementById('statusCard');
+    const bigPrice = document.getElementById('bigPrice');
+    const traditionalCost = document.getElementById('traditionalCost');
+    const savingsText = document.getElementById('savingsText');
+
+    if (getQuoteBtn) {
+      getQuoteBtn.addEventListener('click', function() {
+        const category = document.getElementById('category').value;
+        const condition = document.getElementById('condition').value;
+        const data = pricingData[category];
+        if (!data) return;
+
+        const multiplier = getConditionMultiplier(condition);
+        const flynoPayment = Math.round((data.flynoMin + (data.flynoMax - data.flynoMin) * multiplier) * 100) / 100;
+        const tradAvg = Math.round((data.tradMin + data.tradMax) / 2);
+        const savings = tradAvg + flynoPayment;
+
+        // Format FLY-NO payment
+        let flynoStr;
+        if (flynoPayment < 1) {
+          flynoStr = '£' + flynoPayment.toFixed(2);
+        } else {
+          flynoStr = '£' + Math.round(flynoPayment);
+        }
+
+        bigPrice.innerHTML = 'We\'ll pay you ' + flynoStr + ' for this ' + data.label;
+        traditionalCost.innerHTML = '&pound;' + data.tradMin + '&ndash;&pound;' + data.tradMax;
+        savingsText.innerHTML = '&#10003; You save &pound;' + Math.round(savings) + '+ compared to other services';
+
+        // Show cards
+        valuationCard.style.display = 'block';
+        scheduleCard.style.display = 'block';
+        statusCard.style.display = 'block';
+
+        // Trigger reveal animation
+        [valuationCard, scheduleCard, statusCard].forEach(function(card) {
+          card.classList.add('visible');
+        });
+
+        // Smooth scroll to valuation
+        valuationCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+
+    // Interactive calendar days
+    document.querySelectorAll('.calendar-mini .day').forEach(function(day) {
+      day.addEventListener('click', function() {
+        document.querySelectorAll('.calendar-mini .day').forEach(function(d) {
+          d.classList.remove('selected');
+        });
+        this.classList.add('selected');
+      });
+    });
+
+    // Interactive time slots
+    document.querySelectorAll('.time-slot').forEach(function(slot) {
+      slot.addEventListener('click', function() {
+        document.querySelectorAll('.time-slot').forEach(function(s) {
+          s.classList.remove('selected');
+        });
+        this.classList.add('selected');
+      });
+    });
+  })();
+  </script>
+</body>
+</html>
